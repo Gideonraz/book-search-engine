@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {ADD_USER} from '../utils/mutations';
 import { Form, Button, Alert } from 'react-bootstrap';
-
-// import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
@@ -14,7 +12,7 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
   // set addUser with useMutation
-  const [addUser, { error }] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER);
 
 
   const handleInputChange = (event) => {
@@ -25,7 +23,6 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -33,10 +30,6 @@ const SignupForm = () => {
     }
 
     try {
-      // const response = await createUser(userFormData);
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
 
       // execute addUser mutation and pass in variable data from form
       const { data } = await addUser({
@@ -44,8 +37,7 @@ const SignupForm = () => {
       });
       console.log(data);
       Auth.login(data.addUser.token);
-      // const { token, user } = await response.json();
-      // Auth.login(token);
+
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -60,9 +52,9 @@ const SignupForm = () => {
 
   return (
     <>
-      {/* This is needed for the validation functionality above */}
+      {/* this is required for the validation of the functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
+        {/* shows an alert if the server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
         </Alert>

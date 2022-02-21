@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {useQuery, useMutation} from '@apollo/react-hooks';
 import {GET_ME} from '../utils/queries';
 import {REMOVE_BOOK} from '../utils/mutations';
@@ -10,14 +10,8 @@ const SavedBooks = () => {
   const {loading, data} = useQuery(GET_ME);
 
   const[userData, setData] = useState(loading ? null : data.me);
-  // const newdata = {...userData?.me};
-  const [removeBook, {error}] = useMutation(REMOVE_BOOK);
+  const [removeBook] = useMutation(REMOVE_BOOK);
 
-  // useEffect(() =>{
-  //   if(userData){
-  //     console.log('useeffect!!')
-  //   }
-  // },[userData])
   
   if(!userData){
       return null
@@ -29,7 +23,7 @@ const SavedBooks = () => {
         variables: {bookId},
       });
 
-      // update state of books:
+      // update state of books
       setData(()=>{
         return{
           ...userData,
