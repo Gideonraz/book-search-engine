@@ -7,7 +7,7 @@ const {
   login,
 } = require('../../controllers/user-controller');
 
-// imports middleware
+// imports the middleware
 const { authMiddleware } = require('../../utils/auth');
 
 // puts authMiddleware anywhere we need to send a token for the verification of user
