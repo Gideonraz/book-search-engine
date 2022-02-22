@@ -41,7 +41,7 @@ module.exports = {
     const token = signToken(user);
     res.json({ token, user });
   },
-  // saves a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
+  // saves a book to a users `savedBooks` field by adding it to the set (to prevent duplicates)
   // user comes from `req.user` created in the auth middleware function
   async saveBook({ user, body }, res) {
     console.log(user);
