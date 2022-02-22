@@ -23,7 +23,7 @@ const SavedBooks = () => {
         variables: {bookId},
       });
 
-      // update state of books
+      // updates the state of the books
       setData(()=>{
         return{
           ...userData,

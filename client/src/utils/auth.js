@@ -1,20 +1,20 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-    // retrieves data saved in token
+    // retrieves the data saved in token
     getProfile() {
       return decode(this.getToken());
     }
   
     // checks if the user is still logged in
     loggedIn() {
-      // checks if there is a saved token and if it's still valid
+      // checks if there is a saved token and if it is still valid
       const token = this.getToken();
       // use type coersion to check if token is NOT undefined and if the token is NOT expired
       return !!token && !this.isTokenExpired(token);
     }
   
-    // checks if the token has expired
+    //  this checks if the token has expired
     isTokenExpired(token) {
       try {
         const decoded = decode(token);
@@ -34,7 +34,7 @@ class AuthService {
       return localStorage.getItem('id_token');
     }
   
-    // set token to localStorage and reload page to homepage
+    // sets token to localStorage and reload page to homepage
     login(idToken) {
       // Saves user token to localStorage
       localStorage.setItem('id_token', idToken);
@@ -44,7 +44,7 @@ class AuthService {
   
     // clears token from localStorage and force logout with reload
     logout() {
-      // Clears user token and profile data from localStorage
+      // clears user token and profile data from localStorage
       localStorage.removeItem('id_token');
       // this will reload the page and reset the state of the application
       window.location.assign('/');
